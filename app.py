@@ -11,7 +11,22 @@ import os
 import json
 import random
 import time
-from flask import Flask, render_template, request, jsonify, redirect, url_for, send_from_directory
+from flask import Flask, render_template, request, jsonify, redirect, url_for, send_from_directory, request, Response
+from dotenv import load_dotenv
+load_dotenv()
+
+# Simple HTTP Basic Auth credentials
+USERNAME = os.getenv("APP_USERNAME", "admin")
+PASSWORD = os.getenv("APP_PASSWORD", "tesseract123")
+
+def check_auth(username, password):
+    return username == USERNAME and password == PASSWORD
+
+def authenticate():
+    return Response(
+        'Could not verify your login.\n', 401,
+        {'WWW-Authenticate': 'Basic realm="Login Required"'}
+    )
 
 # Import Tesseract router components
 from tesseract_router import (
@@ -379,7 +394,15 @@ def download_whitepaper():
         'tesseract_whitepaper.pdf',
         as_attachment=True
     )
+@app.before_request
+def require_basic_auth():
+    # Skip static files and whitepaper download
+    if request.path.startswith('/static') or request.path.startswith('/download_whitepaper'):
+        return
 
+    auth = request.authorization
+    if not auth or not check_auth(auth.username, auth.password):
+        return authenticate()
 
 
 if __name__ == '__main__':
