@@ -1,0 +1,190 @@
+/* Dashboard Page Styles */
+
+/* Health metric cards */
+.health-metric-card {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.health-metric-icon {
+    font-size: 2.5rem;
+    margin-right: 20px;
+}
+
+.health-metric-content h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1;
+}
+
+.health-metric-content p {
+    margin: 0;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9rem;
+}
+
+.healthy-card {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.degraded-card {
+    background-color: #f39c12;
+    color: white;
+}
+
+.down-card {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.load-card {
+    background-color: #3498db;
+    color: white;
+}
+
+/* Health heatmap */
+#health-heatmap {
+    width: 100%;
+    min-height: 300px;
+    overflow-x: auto;
+}
+
+.heatmap-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+}
+
+.heatmap-table th, .heatmap-table td {
+    text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.heatmap-table th {
+    background-color: #f5f7f9;
+    font-weight: 600;
+}
+
+.heatmap-cell {
+    width: 80px;
+    height: 80px;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.05);
+}
+
+.heatmap-cell-healthy {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.heatmap-cell-degraded {
+    background-color: #f39c12;
+    color: white;
+}
+
+.heatmap-cell-down {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.heatmap-cell-empty {
+    background-color: #ecf0f1;
+    color: #7f8c8d;
+}
+
+.heatmap-status {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.heatmap-label {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+.heatmap-count {
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+/* Backend table styles */
+#backends-table td {
+    vertical-align: middle;
+}
+
+.backend-status {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.backend-status-healthy {
+    background-color: #2ecc71;
+}
+
+.backend-status-degraded {
+    background-color: #f39c12;
+}
+
+.backend-status-down {
+    background-color: #e74c3c;
+}
+
+.load-bar {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #ecf0f1;
+    overflow: hidden;
+    width: 100%;
+}
+
+.load-bar-fill {
+    height: 100%;
+    background-color: #2ecc71;
+}
+
+.load-bar-fill.warning {
+    background-color: #f39c12;
+}
+
+.load-bar-fill.danger {
+    background-color: #e74c3c;
+}
+
+/* Status badge */
+.status-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status-badge-healthy {
+    background-color: rgba(46, 204, 113, 0.15);
+    color: #27ae60;
+}
+
+.status-badge-degraded {
+    background-color: rgba(243, 156, 18, 0.15);
+    color: #d35400;
+}
+
+.status-badge-down {
+    background-color: rgba(231, 76, 60, 0.15);
+    color: #c0392b;
+}

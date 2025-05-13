@@ -1,0 +1,203 @@
+/* Latency Visualization Styles */
+
+/* Latency heatmap */
+#latency-heatmap {
+    width: 100%;
+    min-height: 400px;
+    overflow-x: auto;
+}
+
+.latency-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 2px;
+}
+
+.latency-table th, .latency-table td {
+    text-align: center;
+    padding: 8px;
+    border-radius: 4px;
+    min-width: 60px;
+}
+
+.latency-table th {
+    background-color: #f5f7f9;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.latency-table th.highlighted, .latency-table td.highlighted {
+    background-color: rgba(52, 152, 219, 0.2);
+}
+
+.latency-table td.highlighted {
+    font-weight: 500;
+}
+
+.latency-cell {
+    border-radius: 4px;
+    transition: transform 0.1s ease;
+}
+
+.latency-cell:hover {
+    transform: scale(1.05);
+}
+
+.latency-low {
+    background-color: rgba(46, 204, 113, 0.8);
+    color: white;
+}
+
+.latency-medium {
+    background-color: rgba(243, 156, 18, 0.8);
+    color: white;
+}
+
+.latency-high {
+    background-color: rgba(231, 76, 60, 0.8);
+    color: white;
+}
+
+.latency-na {
+    background-color: #ecf0f1;
+    color: #7f8c8d;
+}
+
+/* Cost-latency scatter plot */
+#cost-latency-chart {
+    margin-top: 10px;
+}
+
+/* Chip comparison chart */
+#chip-comparison-chart {
+    margin-top: 10px;
+}
+
+/* Latency breakdown visualization */
+#latency-breakdown-viz {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+}
+
+.latency-bar-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.latency-bar {
+    height: 40px;
+    border-radius: 4px;
+    background-color: #ecf0f1;
+    position: relative;
+    overflow: hidden;
+}
+
+.latency-segment {
+    height: 100%;
+    position: absolute;
+    top: 0;
+    transition: width 0.5s ease;
+}
+
+.network-segment {
+    background-color: #3498db;
+    left: 0;
+}
+
+.queue-segment {
+    background-color: #9b59b6;
+}
+
+.processing-segment {
+    background-color: #2ecc71;
+    right: 0;
+}
+
+.latency-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5px;
+    font-size: 0.8rem;
+    color: #555;
+}
+
+.sla-marker {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #e74c3c;
+    z-index: 10;
+}
+
+.sla-label {
+    position: absolute;
+    top: -20px;
+    transform: translateX(-50%);
+    background-color: #e74c3c;
+    color: white;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+}
+
+/* Latency component legend */
+.latency-legend {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+}
+
+.legend-color {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+    margin-right: 5px;
+}
+
+.legend-network {
+    background-color: #3498db;
+}
+
+.legend-queue {
+    background-color: #9b59b6;
+}
+
+.legend-processing {
+    background-color: #2ecc71;
+}
+
+.legend-sla {
+    background-color: #e74c3c;
+}
+
+.legend-label {
+    font-size: 0.85rem;
+}
+
+/* Latency detail items */
+.latency-detail {
+    margin-bottom: 8px;
+    display: flex;
+}
+
+.detail-label {
+    font-weight: 500;
+    width: 140px;
+    color: #555;
+}
+
+.detail-value {
+    flex: 1;
+}

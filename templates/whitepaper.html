@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+<style>
+    .whitepaper-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+        background-color: white;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+    }
+    
+    .whitepaper-title {
+        color: #2c3e50;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+    
+    .download-btn {
+        display: block;
+        width: 100%;
+        max-width: 300px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background-color: #3498db;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+    }
+    
+    .download-btn:hover {
+        background-color: #2980b9;
+        text-decoration: none;
+        color: white;
+    }
+    
+    .download-icon {
+        margin-right: 8px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="whitepaper-container">
+        <h1 class="whitepaper-title">Building A Chip-Agnostic, Latency-Aware Routing Layer for Real-Time AI Inference</h1>
+        
+        <div class="d-flex justify-content-between mb-4">
+            <p><strong>Version:</strong> 1.0.0</p>
+            <p><strong>Date:</strong> May 2025</p>
+        </div>
+        
+        <a href="{{ url_for('download_whitepaper') }}" class="download-btn">
+            <i class="fas fa-file-pdf download-icon"></i> Download Full Whitepaper (PDF)
+        </a>
+        
+        <div class="whitepaper-section">
+            <p>
+                As AI workloads continue to grow in complexity and scale, the need for optimized infrastructure becomes increasingly critical. 
+                Tesseract is a chip-agnostic, latency-aware routing layer designed to optimize real-time AI inference across heterogeneous hardware landscapes. 
+                This whitepaper presents the architecture, algorithms, and performance characteristics of the Tesseract routing system, 
+                demonstrating significant improvements in both latency and cost-efficiency compared to traditional routing approaches.
+            </p>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}

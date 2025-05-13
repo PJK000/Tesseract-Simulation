@@ -1,0 +1,167 @@
+/* Simulator Page Styles */
+
+/* Compliance tags container */
+.compliance-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.compliance-tags .form-check {
+    margin-right: 0;
+}
+
+/* Routing visualization */
+.routing-visualization {
+    background-color: #f5f7f9;
+    border-radius: 8px;
+    padding: 20px;
+    position: relative;
+    min-height: 250px; /* Increased from 150px */
+    margin-bottom: 30px; /* Added margin at the bottom */
+}
+
+#routing-path-viz {
+    height: 220px; /* Increased from 150px */
+    overflow: visible; /* Ensure content isn't cut off */
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.routing-node {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    margin-bottom: 30px; /* Increased from 10px */
+    position: relative;
+    width: 80%;
+    max-width: 350px;
+}
+
+.routing-node h6 {
+    margin-bottom: 5px;
+    font-size: 0.9rem;
+}
+
+.routing-node p {
+    margin-bottom: 0;
+    font-size: 0.8rem;
+    color: #777;
+}
+
+.node-user {
+    border-left: 5px solid #3498db;
+}
+
+.node-router {
+    border-left: 5px solid #9b59b6;
+}
+
+.node-backend {
+    border-left: 5px solid #2ecc71;
+}
+
+.node-fallback {
+    border-left: 5px solid #f39c12;
+}
+
+.node-error {
+    border-left: 5px solid #e74c3c;
+}
+
+.routing-arrow {
+    position: absolute;
+    bottom: -25px; /* Adjusted from -20px */
+    left: 50%;
+    transform: translateX(-50%);
+    color: #95a5a6;
+    font-size: 20px;
+    height: 20px;
+    line-height: 1;
+}
+
+/* Add space after the last node */
+.routing-node:last-child {
+    margin-bottom: 10px;
+}
+
+/* Detail items formatting */
+.detail-item {
+    margin-bottom: 8px;
+    display: flex;
+}
+
+.detail-label {
+    font-weight: 500;
+    width: 130px;
+    color: #555;
+}
+
+.detail-value {
+    flex: 1;
+}
+
+/* Request details panel */
+#routing-result-card .row {
+    margin-top: 20px; /* Add more space between visualization and details */
+}
+
+/* Backends tables formatting */
+#considered-backends-table .selected-row {
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+#considered-backends-table .selected-row td {
+    font-weight: 500;
+}
+
+#considered-backends-table td,
+#filtered-backends-table td {
+    vertical-align: middle;
+}
+
+/* Batch simulation results */
+#batch-results-card .detail-item {
+    margin-bottom: 12px;
+}
+
+#batch-results-card .detail-label {
+    width: 150px;
+}
+
+/* Highlight selected backend */
+.backend-row.selected {
+    background-color: rgba(52, 152, 219, 0.1);
+}
+
+/* Small tag for fallback message */
+.fallback-message {
+    font-size: 0.8rem;
+    color: #e67e22;
+    margin-top: 4px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .detail-item {
+        flex-direction: column;
+    }
+    
+    .detail-label {
+        width: 100%;
+        margin-bottom: 2px;
+    }
+    
+    .routing-visualization {
+        padding: 15px 10px;
+    }
+    
+    .routing-node {
+        width: 95%;
+    }
+}

@@ -1,0 +1,150 @@
+/* Map Page Styles */
+
+#global-map {
+    width: 100%;
+    height: 500px;
+    background-color: #f5f7f9;
+}
+
+.map-controls {
+    display: flex;
+    align-items: center;
+}
+
+/* Custom Leaflet Map Styles */
+.backend-marker {
+    width: 14px !important;
+    height: 14px !important;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 5px rgba(0,0,0,0.3);
+    opacity: 0.9;
+}
+
+.backend-marker-healthy {
+    background-color: #2ecc71;
+}
+
+.backend-marker-degraded {
+    background-color: #f39c12;
+}
+
+.backend-marker-down {
+    background-color: #e74c3c;
+}
+
+.leaflet-popup-content {
+    font-size: 14px;
+}
+
+.popup-title {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.popup-info {
+    margin-bottom: 2px;
+}
+
+.popup-badge {
+    display: inline-block;
+    padding: 2px 6px;
+    font-size: 12px;
+    font-weight: 500;
+    border-radius: 3px;
+    margin-right: 3px;
+    margin-bottom: 3px;
+}
+
+.region-badge {
+    background-color: #dfe6e9;
+    color: #2d3436;
+}
+
+.compliance-badge {
+    background-color: #d6eaf8;
+    color: #2874a6;
+}
+
+.model-popup-badge {
+    background-color: #e8f8f5;
+    color: #16a085;
+}
+
+/* Routing path visualization */
+.routing-path-line {
+    stroke: #3498db;
+    stroke-width: 3;
+    stroke-dasharray: 5, 5;
+    stroke-linecap: round;
+    opacity: 0.8;
+    animation: dash 1s linear infinite;
+}
+
+.routing-path-arrow {
+    fill: #3498db;
+}
+
+.routing-endpoint {
+    fill: #2c3e50;
+    stroke: white;
+    stroke-width: 2;
+}
+
+.routing-midpoint {
+    fill: #3498db;
+    stroke: white;
+    stroke-width: 1.5;
+}
+
+@keyframes dash {
+    to {
+        stroke-dashoffset: -10;
+    }
+}
+
+/* Routing Results */
+#routing-path-display {
+    background-color: #f5f7f9;
+    border-radius: 8px;
+    position: relative;
+}
+
+.routing-results {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+}
+
+/* Backend details table */
+#backend-details-table td {
+    vertical-align: middle;
+}
+
+.backend-models {
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.backend-load-bar {
+    height: 8px;
+    border-radius: 4px;
+    background-color: #ecf0f1;
+    overflow: hidden;
+    width: 100%;
+}
+
+.backend-load-fill {
+    height: 100%;
+    background-color: #2ecc71;
+}
+
+.backend-load-fill.warning {
+    background-color: #f39c12;
+}
+
+.backend-load-fill.danger {
+    background-color: #e74c3c;
+}

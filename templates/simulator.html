@@ -1,0 +1,316 @@
+{% extends "base.html" %}
+
+{% block title %}Tesseract AI Inference Router - Route Simulator{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/simulator.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Inference Request Router Simulator</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">
+                        The Tesseract Router finds the optimal hardware backend for each AI inference request based on model compatibility, latency requirements, geographic constraints, compliance needs, and cost optimization criteria.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Request Configuration</h5>
+                </div>
+                <div class="card-body">
+                    <form id="routing-form">
+                        <div class="mb-3">
+                            <label for="model-select" class="form-label">Model</label>
+                            <select class="form-select" id="model-select" required>
+                                {% for model in models %}
+                                <option value="{{ model }}">{{ model }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">Select the AI model for your inference request</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="token-size" class="form-label">Input Token Size</label>
+                            <input type="range" class="form-range" id="token-size" min="100" max="32000" step="100" value="1000">
+                            <div class="d-flex justify-content-between">
+                                <small>100</small>
+                                <small id="token-size-value">1000 tokens</small>
+                                <small>32,000</small>
+                            </div>
+                            <div class="form-text">Larger token sizes may restrict available backends</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="required-latency" class="form-label">Required Latency (ms)</label>
+                            <input type="range" class="form-range" id="required-latency" min="50" max="1000" step="10" value="200">
+                            <div class="d-flex justify-content-between">
+                                <small>50ms</small>
+                                <small id="latency-value">200ms</small>
+                                <small>1000ms</small>
+                            </div>
+                            <div class="form-text">Your Service Level Agreement (SLA) requirement</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="user-region" class="form-label">User Region</label>
+                            <select class="form-select" id="user-region">
+                                {% for region in regions %}
+                                <option value="{{ region }}">{{ region }}</option>
+                                {% endfor %}
+                            </select>
+                            <div class="form-text">Your geographic location affects network latency</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Compliance Requirements</label>
+                            <div class="compliance-tags">
+                                {% for tag in compliance_tags %}
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input compliance-check" type="checkbox" id="tag-{{ tag }}" value="{{ tag }}">
+                                    <label class="form-check-label" for="tag-{{ tag }}">{{ tag }}</label>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="form-text">Data residency and regulatory requirements</div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="priority" class="form-label">Priority Level</label>
+                                <select class="form-select" id="priority">
+                                    <option value="1">1 - Highest</option>
+                                    <option value="2">2 - High</option>
+                                    <option value="3" selected>3 - Normal</option>
+                                    <option value="4">4 - Low</option>
+                                    <option value="5">5 - Lowest</option>
+                                </select>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <label for="max-cost" class="form-label">Max Cost (USD)</label>
+                                <input type="number" class="form-control" id="max-cost" min="0" step="0.01" placeholder="No limit">
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="prefer-cost">
+                                <label class="form-check-label" for="prefer-cost">
+                                    Prefer cost over latency
+                                </label>
+                            </div>
+                            <div class="form-text">Optimize for lower cost even if it means higher latency</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="simulate-failure">
+                                <label class="form-check-label" for="simulate-failure">
+                                    Simulate backend failure
+                                </label>
+                            </div>
+                            <div class="form-text">Tests Tesseract's fallback routing mechanism</div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">Route Request</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mt-3">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Batch Simulation</h5>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted mb-3">
+                        Route multiple requests with the current settings to test system behavior
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-outline-primary flex-grow-1" id="simulate-5-btn">
+                            Simulate 5
+                        </button>
+                        <button class="btn btn-outline-primary flex-grow-1" id="simulate-20-btn">
+                            Simulate 20
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-7">
+            <div class="card mb-3" id="routing-result-card" style="display: none;">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Routing Decision</h5>
+                </div>
+                <div class="card-body">
+                    <div class="routing-visualization mb-4">
+                        <div id="routing-path-viz"></div>
+                    </div>
+                    
+                    <div class="row mt-4">
+                        <div class="col-md-6">
+                            <h6 class="border-bottom pb-2 mb-3">Request Details</h6>
+                            <div class="detail-item">
+                                <span class="detail-label">Model:</span>
+                                <span class="detail-value" id="result-model"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Input Size:</span>
+                                <span class="detail-value" id="result-tokens"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Required Latency:</span>
+                                <span class="detail-value" id="result-required-latency"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Compliance:</span>
+                                <span class="detail-value" id="result-compliance"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">User Region:</span>
+                                <span class="detail-value" id="result-user-region"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h6 class="border-bottom pb-2 mb-3">Routing Decision</h6>
+                            <div class="detail-item">
+                                <span class="detail-label">Selected Backend:</span>
+                                <span class="detail-value" id="result-backend"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Backend Region:</span>
+                                <span class="detail-value" id="result-backend-region"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Expected Latency:</span>
+                                <span class="detail-value" id="result-latency"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">SLA Met:</span>
+                                <span class="detail-value" id="result-sla"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Total Cost:</span>
+                                <span class="detail-value" id="result-cost"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Route Type:</span>
+                                <span class="detail-value" id="result-route-type"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">Considered Backends</h5>
+                    <div>
+                        <button class="btn btn-sm btn-outline-light" id="toggle-filtered-btn">
+                            Show Filtered Out
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover mb-0" id="considered-backends-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Backend ID</th>
+                                    <th>Chip Type</th>
+                                    <th>Region</th>
+                                    <th>Status</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3" id="filtered-backends-card" style="display: none;">
+                <div class="card-header bg-danger text-white">
+                    <h5 class="card-title mb-0">Filtered Out Backends</h5>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover mb-0" id="filtered-backends-table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Backend ID</th>
+                                    <th>Chip Type</th>
+                                    <th>Region</th>
+                                    <th>Reason</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Will be populated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mt-3" id="batch-results-card" style="display: none;">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="card-title mb-0">Batch Simulation Results</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <canvas id="batch-results-chart" height="200"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Summary</h6>
+                            <div class="detail-item">
+                                <span class="detail-label">Total Requests:</span>
+                                <span class="detail-value" id="batch-total"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Successful Routes:</span>
+                                <span class="detail-value" id="batch-success"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Fallback Routes:</span>
+                                <span class="detail-value" id="batch-fallback"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Failed Routes:</span>
+                                <span class="detail-value" id="batch-failed"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">SLA Met:</span>
+                                <span class="detail-value" id="batch-sla-met"></span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Avg. Latency:</span>
+                                <span class="detail-value" id="batch-avg-latency"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/simulator.js') }}"></script>
+{% endblock %}

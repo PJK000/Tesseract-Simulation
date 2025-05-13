@@ -1,0 +1,325 @@
+{% extends "base.html" %}
+
+{% block title %}Tesseract AI Inference Router - Global AI Infrastructure{% endblock %}
+
+{% block extra_css %}
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #1a2a6c, #2a3f7c 50%, #2c3e50);
+        color: white;
+        padding: 5rem 0;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 2;
+    }
+    
+    .hero-title {
+        font-weight: 700;
+        font-size: 2.8rem;
+    }
+    
+    .hero-subtitle {
+        font-weight: 300;
+        font-size: 1.3rem;
+        max-width: 800px;
+        margin: 1rem auto 2rem;
+    }
+    
+    .metrics-bar {
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 10px;
+        padding: 1.2rem;
+        margin-top: 2rem;
+    }
+    
+    .metric-item {
+        text-align: center;
+    }
+    
+    .metric-value {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #3498db;
+        display: block;
+    }
+    
+    .metric-label {
+        font-size: 0.85rem;
+        opacity: 0.9;
+    }
+    
+    .value-card {
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        padding: 2rem;
+        height: 100%;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .value-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+    
+    .value-card-icon {
+        background-color: #f0f7ff;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    }
+    
+    .value-card-icon i {
+        font-size: 1.8rem;
+        color: #3498db;
+    }
+    
+    .value-card h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    
+    .demo-button {
+        display: block;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 1.5rem;
+        height: 100%;
+        text-decoration: none;
+        color: #2c3e50;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .demo-button:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        color: #3498db;
+        text-decoration: none;
+    }
+    
+    .demo-icon {
+        font-size: 2.5rem;
+        color: #3498db;
+        margin-bottom: 1rem;
+    }
+    
+    .comparison-table {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 1rem;
+    }
+    
+    .comparison-header {
+        background-color: #f8f9fa;
+        font-weight: 600;
+    }
+    
+    .comparison-feature {
+        font-weight: 500;
+    }
+    
+    .comparison-traditional {
+        background-color: #f8f9fa;
+    }
+    
+    .comparison-tesseract {
+        background-color: #e8f4fd;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container text-center hero-content">
+        <h1 class="hero-title">Tesseract Cloud</h1>
+        <p class="hero-subtitle">A chip-agnostic, latency-aware routing layer for real-time AI inference that delivers intelligence to the right place, at the right time, on the right hardware</p>
+        
+        <div class="row metrics-bar">
+            <div class="col-md-4 metric-item">
+                <span class="metric-value">70%</span>
+                <span class="metric-label">FASTER RESPONSES</span>
+            </div>
+            <div class="col-md-4 metric-item">
+                <span class="metric-value">100%</span>
+                <span class="metric-label">POLICY COMPLIANCE</span>
+            </div>
+            <div class="col-md-4 metric-item">
+                <span class="metric-value">24ms</span>
+                <span class="metric-label">AVERAGE LATENCY</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Value Proposition Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="mb-4">Why Tesseract</h2>
+                <p class="lead text-muted">The first intelligent routing layer designed for the AI inference era</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="value-card">
+                    <div class="value-card-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Performance First</h3>
+                    <p>Dynamic routing to the fastest silicon for each request, optimizing latency across heterogeneous hardware (GPUs, TPUs, Groq, Cerebras) while balancing load across clusters.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="value-card">
+                    <div class="value-card-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Compliance Built-in</h3>
+                    <p>Automatic adherence to data residency, regulatory requirements (GDPR, HIPAA), and model licensing, ensuring that every inference request respects privacy and sovereignty.</p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="value-card">
+                    <div class="value-card-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h3>Reliable Execution</h3>
+                    <p>Intelligent fallback mechanisms ensure uninterrupted service even during backend failures, with automatic rerouting based on SLA requirements and real-time conditions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Demo Navigation Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="mb-2">Explore The Platform</h2>
+                <p class="text-muted">See Tesseract in action through our interactive demonstrations</p>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-3">
+                <a href="/map" class="demo-button">
+                    <div class="demo-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h5>Global Map</h5>
+                    <p class="text-muted mb-0">Explore our worldwide backend distribution</p>
+                </a>
+            </div>
+            
+            <div class="col-md-3">
+                <a href="/simulator" class="demo-button">
+                    <div class="demo-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <h5>Route Simulator</h5>
+                    <p class="text-muted mb-0">Test the router with custom parameters</p>
+                </a>
+            </div>
+            
+            <div class="col-md-3">
+                <a href="/dashboard" class="demo-button">
+                    <div class="demo-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h5>Health Dashboard</h5>
+                    <p class="text-muted mb-0">Monitor system performance</p>
+                </a>
+            </div>
+            
+            <div class="col-md-3">
+                <a href="/latency-viz" class="demo-button">
+                    <div class="demo-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h5>Latency Analysis</h5>
+                    <p class="text-muted mb-0">Explore latency optimization</p>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Comparison Section -->
+<section class="py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <h2 class="mb-4">Traditional Inference vs. Tesseract</h2>
+                
+                <table class="table comparison-table">
+                    <thead>
+                        <tr>
+                            <th class="comparison-header">Feature</th>
+                            <th class="comparison-header">Traditional</th>
+                            <th class="comparison-header">Tesseract</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="comparison-feature">Hardware Flexibility</td>
+                            <td class="comparison-traditional">Fixed (single vendor)</td>
+                            <td class="comparison-tesseract">Dynamic (multi-vendor)</td>
+                        </tr>
+                        <tr>
+                            <td class="comparison-feature">Regional Latency</td>
+                            <td class="comparison-traditional">High for distant users</td>
+                            <td class="comparison-tesseract">Optimized globally</td>
+                        </tr>
+                        <tr>
+                            <td class="comparison-feature">Compliance</td>
+                            <td class="comparison-traditional">Manual enforcement</td>
+                            <td class="comparison-tesseract">Automated governance</td>
+                        </tr>
+                        <tr>
+                            <td class="comparison-feature">Failover Strategy</td>
+                            <td class="comparison-traditional">Basic retry logic</td>
+                            <td class="comparison-tesseract">Intelligent rerouting</td>
+                        </tr>
+                        <tr>
+                            <td class="comparison-feature">Cost Optimization</td>
+                            <td class="comparison-traditional">Static pricing</td>
+                            <td class="comparison-tesseract">Dynamic, usage-based</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section class="py-5 bg-primary text-white">
+    <div class="container text-center">
+        <h2 class="mb-3">Ready to Experience Tesseract?</h2>
+        <p class="lead mb-4">Start exploring our interactive demos to see the future of AI inference infrastructure</p>
+        <a href="/simulator" class="btn btn-light btn-lg px-4">Launch Simulator</a>
+    </div>
+</section>
+{% endblock %}

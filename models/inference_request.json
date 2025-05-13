@@ -1,0 +1,42 @@
+[
+    {
+      "unique_id": "req_001",
+      "model_name": "llama-3-70b",
+      "input_token_size": 1024,
+      "required_latency_ms": 200,
+      "compliance_constraints": ["eu-data-residency"],
+      "priority": 1
+    },
+    {
+      "unique_id": "req_002",
+      "model_name": "gpt-4",
+      "input_token_size": 4096,
+      "required_latency_ms": 500,
+      "compliance_constraints": ["hipaa", "gdpr"],
+      "priority": 2
+    },
+    {
+      "unique_id": "req_003",
+      "model_name": "claude-3-opus",
+      "input_token_size": 8192,
+      "required_latency_ms": 1000,
+      "compliance_constraints": ["sox-compliance", "gdpr"],
+      "priority": 3
+    },
+    {
+      "unique_id": "req_004",
+      "model_name": "mistral-8x7b",
+      "input_token_size": 2048,
+      "required_latency_ms": 150,
+      "compliance_constraints": [],
+      "priority": 1
+    },
+    {
+      "unique_id": "req_005",
+      "model_name": "llama-3-70b",
+      "input_token_size": 512,
+      "required_latency_ms": 100,
+      "compliance_constraints": ["us-data-residency"],
+      "priority": 1
+    }
+  ]
